@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Word Lava</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <header class="hud">
+    <div class="stat"><span class="lbl">Height</span><span class="val" id="heightVal">0 m</span></div>
+    <div class="stat gapstat">
+      <span class="lbl">Lava</span><span class="val" id="gapVal">10.0 m below</span>
+      <div class="gapbar"><i id="gapFill"></i></div>
+    </div>
+    <div class="stat"><span class="lbl">Best</span><span class="val" id="bestVal">0 m</span></div>
+  </header>
+
+  <div id="stage">
+    <div id="chainLog" aria-live="off"></div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </div>
+
+  <form id="bar" autocomplete="off">
+    <div class="row">
+      <div class="key" id="nextKey"><b id="nextLetter">A</b><small id="nextCount">0</small></div>
+      <input id="word" type="text" inputmode="text" autocomplete="off" autocapitalize="none"
+             autocorrect="off" spellcheck="false" enterkeyhint="go" maxlength="24"
+             placeholder="A…" aria-label="Type a word starting with the glowing letter">
+      <button class="go" id="goBtn" type="submit">Climb</button>
+    </div>
+    <div class="aux">
+      <button class="ghost" id="hintBtn" type="button">Hint · 3</button>
+      <button class="ghost" id="skipBtn" type="button">Skip letter</button>
+      <div class="crust" id="crust"><span>Crust</span><span class="pips" id="pips">
+        <i></i><i></i><i></i><i></i><i></i>
+      </span></div>
+    </div>
+  </form>
+
+  <div class="overlay" id="overlay">
+    <section class="panel" data-panel="menu">
+      <h1 class="title">Word <span>Lava</span></h1>
+      <p class="tag">Your words are the floor. Keep typing or melt.</p>
+      <div class="demo"><span>MAGM<em>A</em></span><span class="arr">→</span><span><em>A</em>NCHO<em>R</em></span><span class="arr">→</span><span><em>R</em>IVER</span></div>
+      <ul class="rules">
+        <li><span><b>Chain your words.</b> Each word starts with the glowing letter — the last letter of your previous word.</span></li>
+        <li><span><b>Longer words climb higher.</b> Every letter lifts you 1&nbsp;m. J, Q, X, Z add 3&nbsp;m bonus each. K, V add 1&nbsp;m bonus.</span></li>
+        <li><span><b>Watch your endings.</b> The number under the glowing letter shows how many unused words start with it.</span></li>
+        <li><span><b>Mistakes feed the lava.</b> A misspelled, repeated, or off-letter word surges it 1&nbsp;m.</span></li>
+        <li><span><b>Five clean words in a row</b> crusts the lava over for 3 seconds.</span></li>
+      </ul>
+      <button class="primary" id="startBtn" type="button">Start climbing</button>
+      <p class="meta">Stuck? Hint reveals a word (3 per climb). Skip letter swaps it, but surges the lava 3&nbsp;m.</p>
+    </section>
+
+    <section class="panel" data-panel="over" hidden>
+      <span class="badge" id="newBest" hidden>New best</span>
+      <h2 class="h2">The lava got you</h2>
+      <p class="tag" id="overSub">You climbed 0 m.</p>
+      <div class="stats">
+        <div><span class="lbl">Height</span><span class="v" id="sHeight">0 m</span></div>
+        <div><span class="lbl">Words</span><span class="v" id="sWords">0</span></div>
+        <div><span class="lbl">Longest word</span><span class="v" id="sLongest">–</span></div>
+        <div><span class="lbl">Best streak</span><span class="v" id="sStreak">0</span></div>
+      </div>
+      <span class="lbl">Your chain</span>
+      <div class="chainbox" id="chainBox"></div>
+      <div class="btnrow"><button class="primary" id="againBtn" type="button">Climb again</button></div>
+    </section>
+  </div>
+
+</div>
+<script src="words.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
